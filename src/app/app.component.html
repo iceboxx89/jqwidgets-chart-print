@@ -1,4 +1,13 @@
-<jqxChart id="myChart" [width]="'100%'" [height]="500" [auto-create]='false'></jqxChart>
-<img id="myImage" src="" alt="">
-<button (click)="generatePdf()"> generatePdf </button>
+<div *ngIf="httpCall | async as c; else loading"></div>
+<div>
+  <jqxChart id="myChart" [width]="'100%'" [height]="500" [auto-create]='false'></jqxChart>
+  <img id="myImage" src="" alt="">
+  <button (click)="generatePdf()"> generatePdf </button>
+</div>
 <router-outlet></router-outlet>
+
+<ng-template #loading>
+  <div>
+    loading...
+  </div>
+</ng-template>

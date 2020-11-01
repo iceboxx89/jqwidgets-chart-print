@@ -11,7 +11,9 @@ import { jsPDF } from 'jspdf';
 })
 export class AppComponent implements OnInit, AfterViewInit {
   title = 'jqwidgets-pdf';
+  public httpCall: any;
   private employeeData: any[] = [];
+
   @ViewChild(jqxChartComponent, {static: false}) chart: jqxChartComponent;
 
   constructor(private httpClient: HttpClient) {}
@@ -20,9 +22,9 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.httpClient.get('http://dummy.restapiexample.com/api/v1/employees').subscribe((response: any) => {
-      console.log(response);
-      this.employeeData = response.data;
+    this.httpCall = this.httpClient.get('./assets/data.json');
+    this.httpCall.subscribe((response: any) => {
+      this.employeeData = response;
       const chartOptions: jqwidgets.ChartOptions = {
         title: '',
         description: '',
